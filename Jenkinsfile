@@ -201,9 +201,9 @@ pipeline {
     // tools {
     //   terraform 'terraform'
     // }
-    // tools {
-    //   maven 'maven3'
-    // }
+    tools {
+      maven 'maven3'
+    }
 
     stages {
         stage ('Build jar - Backend') {
@@ -211,20 +211,20 @@ pipeline {
                 sh 'mvn -f validator-backend/pom.xml clean install'         
             }
         }
-        // stage ('Build Frontend') {
-        //     steps {
-        //         sh 'npm install' 
-        //         sh 'npm run build'      
-        //     }
-        // }      
+        stage ('Build Frontend') {
+            steps {
+                sh 'npm install' 
+                sh 'npm run build'      
+            }
+        }      
         
         stage ('Docker Build and push to Dockerhub') {
             steps {
             // Build and push image with Jenkins' docker-plugin
                 withDockerRegistry([credentialsId: "dockerhub_id", url: "https://index.docker.io/v1/"]) {
-                image = docker.build("jaymezon/jumia-phone-number-validator", "jumia_phone_validator")
-                // image = docker.build("jaymezon/validator-backend-image", "jumia-phone-number-validator/validator-backend")
-                // image = docker.build("jaymezon/validator-frontend-image", "jumia-phone-number-validator/validator-frontend")
+                // image = docker.build("jaymezon/jumia-phone-number-validator", "jumia_phone_validator")
+                image = docker.build("jaymezon/validator-backend-image", "jumia-phone-number-validator/validator-backend")
+                image = docker.build("jaymezon/validator-frontend-image", "jumia-phone-number-validator/validator-frontend")
                 image.push()    
                 }
             }
