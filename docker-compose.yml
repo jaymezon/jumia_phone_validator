@@ -1,0 +1,11 @@
+version: '2'
+services:
+    backend:
+         image: jaymezon/validator-backend-image:latest
+         ports:
+           - 8080:8080
+       
+    frontend:
+         image: jaymezon/validator-frontend-image:latest
+         ports:
+            - 8081:8081
