@@ -11,7 +11,7 @@ pipeline {
         dockerImage = ''
         registry = 'jaymezon/validator-backend-image'
         registry = 'jaymezon/validator-frontend-image'
-        registryCredential = 'dockerhub_id'
+        registryCredential = 'docker_hub'
     }
     stages {
         stage ('Build jar - Backend') {
