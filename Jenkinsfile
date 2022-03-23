@@ -52,8 +52,8 @@ pipeline {
         //         sh 'docker container ls -a -fname=validator-frontend-image -q | xargs -r docker container rm'
         //     }
         // }
-        // // Stopping Docker containers for cleaner Docker run
-        // stage('docker stop container') {
+        // // start Docker containers for cleaner Docker run
+        // stage('docker start container') {
         //     steps {
         //         script{
         //             dockerImage.run("-p 8080:8080 --rm vidaaltor-backend-image")
