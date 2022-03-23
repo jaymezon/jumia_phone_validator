@@ -7,10 +7,11 @@ pipeline {
       maven 'maven3'
     }
     environment{
-        choice(name: 'action', choices: 'create\ndestroy', description: 'Create/update or destroy the eks cluster.')
+        // choice(name: 'action', choices: 'create\ndestroy', description: 'Create/update or destroy the eks cluster.')
         dockerImage = ''
-        registry = 'jaymezon/validator-backend-image'
-        registry = 'jaymezon/validator-frontend-image'
+        // registry = 'jaymezon/validator-backend-image' 
+        // registry = 'jaymezon/validator-frontend-image'
+        registry = 'jaymezon/jumia_phone_validator'
         registryCredential = 'docker_hub'
     }
     stages {
@@ -218,17 +219,17 @@ pipeline {
 //         //     }
 //         // }      
         
-//         stage ('Docker Build and push to Dockerhub') {
-//             steps {
-//             // Build and push image with Jenkins' docker-plugin
-//                 withDockerRegistry([credentialsId: "dockerhub_id", url: "https://index.docker.io/v1/"]) {
-//                 image = docker.build("jaymezon/jumia-phone-number-validator", "jumia_phone_validator")
-//                 // image = docker.build("jaymezon/validator-backend-image", "jumia-phone-number-validator/validator-backend")
-//                 // image = docker.build("jaymezon/validator-frontend-image", "jumia-phone-number-validator/validator-frontend")
-//                 image.push()    
-//                 }
-//             }
-//         }
+        // stage ('Docker Build and push to Dockerhub') {
+        //     steps {
+        //     // Build and push image with Jenkins' docker-plugin
+        //         withDockerRegistry([credentialsId: "dockerhub_id", url: "https://index.docker.io/v1/"]) {
+        //         image = docker.build("jaymezon/jumia-phone-number-validator", "jumia_phone_validator")
+        //         // image = docker.build("jaymezon/validator-backend-image", "jumia-phone-number-validator/validator-backend")
+        //         // image = docker.build("jaymezon/validator-frontend-image", "jumia-phone-number-validator/validator-frontend")
+        //         image.push()    
+        //         }
+        //     }
+        // }
 //         // stage ("terraform init") {
 //         //     steps {
 //         //         sh 'terraform init'
