@@ -1,6 +1,6 @@
 provider "aws" {
-  region = "ap-south-1"
-  profile = "Ajay"
+  region = "eu-central-1"
+  profile = "jmumyu"
 }
 
 data "aws_kms_secrets" "creds" {
