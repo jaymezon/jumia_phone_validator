@@ -27,7 +27,7 @@ resource "kubernetes_deployment" "deploy" {
 
       spec {
         container {
-          image = "jumia_phone_validator"
+          image = "validator-backend-image"
           name  = "jumia_phone_validator"
           port   {
               name = "jumia_phone_validator"

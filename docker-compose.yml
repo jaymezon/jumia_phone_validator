@@ -1,11 +1,62 @@
 version: '2'
 services:
-    backend:
-         image: jaymezon/validator-backend-image:latest
-         ports:
-           - 8080:8080
-       
-    frontend:
-         image: jaymezon/validator-frontend-image:latest
-         ports:
-            - 8081:8081
+
+  jumia_phone_validator_postgres:
+    image: "postgres:9.6-alpine"
+    container_name: jumia_phone_validator_postgres
+    volumes:
+      - jumia-persistent-storage:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB:jumia_phone_validator
+      - POSTGRES_USER:jumia
+      - POSTGRES_PASSWORD:root
+
+  jumia_phone_validator-frontend:
+    image: validator-frontend-image :latest
+    ports:
+      - 8081:8081
+    links:
+      - jumia_phone_validator-backend
+    depends_on:
+      - jumia_phone_validator-backend
+
+  jumia_phone_validator-backend:
+    image: validator-backend-image:latest
+    ports:
+      - 8080:8080
+    environment:
+      - DB_SERVER=jumia_phone_validator_postgres  
+    links:
+      - jumia_phone_validator_postgres   
+
+#   jumia_phone_validator_backend:
+#     restart: always
+#     build: 
+#       context: ./validator-backend
+#       dockerfile: Dockerfile
+#     container_name: validator-backend-image
+#     environment:
+#       - DB_SERVER=jumia_phone_validator_postgres
+#     ports:
+#       - 8080:8080
+#     links:
+#       - jumia_phone_validator_postgres    
+
+#   jumia_phone_validator_frontend:
+#     restart: always 
+#     build: 
+#       context: ./validator-frontend
+#       dockerfile: Dockerfile
+#     container_name: validator-frontend-image 
+#     ports:
+#       - 8081:8081
+#     links:
+#       - jumia_phone_validator_backend
+#     depends_on:
+#       - jumia_phone_validator_backend
+
+
+volumes:
+  jumia-persistent-storage:
