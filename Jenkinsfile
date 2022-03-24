@@ -17,6 +17,11 @@ pipeline {
         registryCredential = 'docker_hub'
     }
     stages {
+        stage('Cloning our Git') {
+            steps {
+                git 'https://github.com/jaymezon/jumia_phone_validator'
+            }
+        }
         stage ('Build jar - Backend') {
             steps {
                 sh 'mvn -f validator-backend/pom.xml clean install'         
@@ -57,8 +62,7 @@ pipeline {
             steps {
                 sh 'docker-compose -f docker-compose.yml up '
             }
-        }
-        
+        }        
         stage('Terraform Plan') {            
             steps {
                 script {
